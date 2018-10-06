@@ -1,0 +1,53 @@
+$primary-color: rgba(255, 255, 255, 0.87);
+$secondary-color: #a30303;
+
+$show-home-image: true;
+$home-image: url(../img/background.jpg);
+$background-opacity: 0.8;
+
+@mixin easeOut { //@mixin is like a function
+    transition: all 0.5s ease-out;  //1st parameter is all, anything that is transitionable. 2nd: duration of transition. 3rd: type of motion
+}
+
+@mixin background {
+    @if $show-home-image { //if $show-home-image is true, then do this:
+        &#bg-img {
+            background: $home-image;
+            background-attachment: fixed;
+            background-size: cover;
+            
+            .overlay {  
+                //styling is to cover the whole body
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                z-index: -1;
+                background: rgba($primary-color, $background-opacity);
+            }
+        }
+    }
+}
+
+@mixin mediaSm {
+    @media screen and (max-width: 400px) { 
+        @content;  //@content is a directive in sass that passes a content block into a mixin
+    }
+}
+
+@mixin mediaMd {
+    @media screen and (max-width: 768px) {
+       @content; 
+    }
+}
+@mixin mediaLg {
+    @media screen and (min-width: 769) and (max-width: 1170px) {
+        @content;
+    }
+}
+@mixin mediaXl {
+    @media screen and (min-width: 1171px) { 
+        @content;
+    }
+}
